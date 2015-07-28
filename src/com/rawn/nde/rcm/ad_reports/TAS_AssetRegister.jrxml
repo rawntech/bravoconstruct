@@ -1,0 +1,683 @@
+<?xml version="1.0" encoding="UTF-8"  ?>
+<!-- Created with iReport - A designer for JasperReports -->
+<!DOCTYPE jasperReport PUBLIC "//JasperReports//DTD Report Design//EN" "http://jasperreports.sourceforge.net/dtds/jasperreport.dtd">
+<jasperReport
+		 name="classic_landscape"
+		 columnCount="1"
+		 printOrder="Vertical"
+		 orientation="Portrait"
+		 pageWidth="842"
+		 pageHeight="595"
+		 columnWidth="782"
+		 columnSpacing="0"
+		 leftMargin="30"
+		 rightMargin="30"
+		 topMargin="20"
+		 bottomMargin="20"
+		 whenNoDataType="NoPages"
+		 isTitleNewPage="false"
+		 isSummaryNewPage="false">
+	<property name="ireport.scriptlethandling" value="0" />
+	<property name="ireport.encoding" value="UTF-8" />
+	<import value="java.util.*" />
+	<import value="net.sf.jasperreports.engine.*" />
+	<import value="net.sf.jasperreports.engine.data.*" />
+
+	<queryString><![CDATA[select a_asset_id, a.ad_client_id, a.ad_org_id, a.isactive, a.created, a.createdby, a.updated, 
+a.updatedby, a.value, a.name, a.description, a.help, a.a_asset_group_id, a.m_product_id, a.serno,
+ a.lot, a.versionno, a.guaranteedate, a.assetservicedate, a.isowned, a.assetdepreciationdate, a.uselifeyears, 
+ a.uselifemonths, a.lifeuseunits, a.useunits, a.isdisposed, a.assetdisposaldate, a.isinposession, a.locationcomment, 
+ a.m_locator_id, a.c_bpartner_id, a.c_bpartner_location_id, a.c_location_id, a.processing, a.isdepreciated, a.isfullydepreciated,
+  a.ad_user_id, a.amortizationenddate, a.amortizationstartdate, a.annualamortizationpercentage, a.assetvalueamt, a.c_currency_id, 
+  a.datecancelled, a.datepurchased, a.m_attributesetinstance_id, a.residualassetvalueamt, a.acctvalueamt, a.amortizationtype, 
+  a.amortizationvalueamt, a.assetschedule, a.documentno, a.processed, a.profit, a.qty, a.amortizationcalctype, a.depreciatedplan, 
+  a.depreciatedpreviousamt, a.depreciatedvalue, a.issummary, a.c_project_id, a.isstatic, a.is30daymonth, a.process_asset,
+ac.name asset_category, p.name product
+from a_asset a, m_product p ,a_asset_group ac
+WHERE a.m_product_id=p.m_product_id
+AND a.a_asset_group_id=ac.a_asset_group_id]]></queryString>
+
+	<field name="a_asset_id" class="java.lang.String"/>
+	<field name="ad_client_id" class="java.lang.String"/>
+	<field name="ad_org_id" class="java.lang.String"/>
+	<field name="isactive" class="java.lang.String"/>
+	<field name="created" class="java.sql.Timestamp"/>
+	<field name="createdby" class="java.lang.String"/>
+	<field name="updated" class="java.sql.Timestamp"/>
+	<field name="updatedby" class="java.lang.String"/>
+	<field name="value" class="java.lang.String"/>
+	<field name="name" class="java.lang.String"/>
+	<field name="description" class="java.lang.String"/>
+	<field name="help" class="java.lang.String"/>
+	<field name="a_asset_group_id" class="java.lang.String"/>
+	<field name="m_product_id" class="java.lang.String"/>
+	<field name="serno" class="java.lang.String"/>
+	<field name="lot" class="java.lang.String"/>
+	<field name="versionno" class="java.lang.String"/>
+	<field name="guaranteedate" class="java.sql.Timestamp"/>
+	<field name="assetservicedate" class="java.sql.Timestamp"/>
+	<field name="isowned" class="java.lang.String"/>
+	<field name="assetdepreciationdate" class="java.sql.Timestamp"/>
+	<field name="uselifeyears" class="java.math.BigDecimal"/>
+	<field name="uselifemonths" class="java.math.BigDecimal"/>
+	<field name="lifeuseunits" class="java.math.BigDecimal"/>
+	<field name="useunits" class="java.math.BigDecimal"/>
+	<field name="isdisposed" class="java.lang.String"/>
+	<field name="assetdisposaldate" class="java.sql.Timestamp"/>
+	<field name="isinposession" class="java.lang.String"/>
+	<field name="locationcomment" class="java.lang.String"/>
+	<field name="m_locator_id" class="java.lang.String"/>
+	<field name="c_bpartner_id" class="java.lang.String"/>
+	<field name="c_bpartner_location_id" class="java.lang.String"/>
+	<field name="c_location_id" class="java.lang.String"/>
+	<field name="processing" class="java.lang.String"/>
+	<field name="isdepreciated" class="java.lang.String"/>
+	<field name="isfullydepreciated" class="java.lang.String"/>
+	<field name="ad_user_id" class="java.lang.String"/>
+	<field name="amortizationenddate" class="java.sql.Timestamp"/>
+	<field name="amortizationstartdate" class="java.sql.Timestamp"/>
+	<field name="annualamortizationpercentage" class="java.math.BigDecimal"/>
+	<field name="assetvalueamt" class="java.math.BigDecimal"/>
+	<field name="c_currency_id" class="java.lang.String"/>
+	<field name="datecancelled" class="java.sql.Timestamp"/>
+	<field name="datepurchased" class="java.sql.Timestamp"/>
+	<field name="m_attributesetinstance_id" class="java.lang.String"/>
+	<field name="residualassetvalueamt" class="java.math.BigDecimal"/>
+	<field name="acctvalueamt" class="java.math.BigDecimal"/>
+	<field name="amortizationtype" class="java.lang.String"/>
+	<field name="amortizationvalueamt" class="java.math.BigDecimal"/>
+	<field name="assetschedule" class="java.lang.String"/>
+	<field name="documentno" class="java.lang.String"/>
+	<field name="processed" class="java.lang.String"/>
+	<field name="profit" class="java.math.BigDecimal"/>
+	<field name="qty" class="java.math.BigDecimal"/>
+	<field name="amortizationcalctype" class="java.lang.String"/>
+	<field name="depreciatedplan" class="java.math.BigDecimal"/>
+	<field name="depreciatedpreviousamt" class="java.math.BigDecimal"/>
+	<field name="depreciatedvalue" class="java.math.BigDecimal"/>
+	<field name="issummary" class="java.lang.String"/>
+	<field name="c_project_id" class="java.lang.String"/>
+	<field name="isstatic" class="java.lang.String"/>
+	<field name="is30daymonth" class="java.lang.String"/>
+	<field name="process_asset" class="java.lang.String"/>
+	<field name="asset_category" class="java.lang.String"/>
+	<field name="product" class="java.lang.String"/>
+
+
+		<group  name="a_asset_group_id" >
+			<groupExpression><![CDATA[$F{a_asset_group_id}]]></groupExpression>
+			<groupHeader>
+			<band height="15"  isSplitAllowed="true" >
+				<rectangle>
+					<reportElement
+						x="0"
+						y="0"
+						width="782"
+						height="14"
+						forecolor="#8080FF"
+						backcolor="#CFC8F0"
+						key="rectangle"/>
+					<graphicElement stretchType="NoStretch"/>
+				</rectangle>
+				<staticText>
+					<reportElement
+						x="25"
+						y="0"
+						width="96"
+						height="14"
+						forecolor="#000000"
+						key="staticText"/>
+					<box>					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+</box>
+					<textElement>
+						<font size="10"/>
+					</textElement>
+				<text><![CDATA[Asset Group]]></text>
+				</staticText>
+				<textField isStretchWithOverflow="false" pattern="" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="124"
+						y="0"
+						width="398"
+						height="14"
+						forecolor="#000000"
+						key="textField"/>
+					<box>					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+</box>
+					<textElement>
+						<font size="10"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{asset_category}]]></textFieldExpression>
+				</textField>
+			</band>
+			</groupHeader>
+			<groupFooter>
+			<band height="10"  isSplitAllowed="true" >
+			</band>
+			</groupFooter>
+		</group>
+		<group  name="m_product_id" >
+			<groupExpression><![CDATA[$F{m_product_id}]]></groupExpression>
+			<groupHeader>
+			<band height="18"  isSplitAllowed="true" >
+				<staticText>
+					<reportElement
+						x="50"
+						y="1"
+						width="96"
+						height="16"
+						forecolor="#000000"
+						key="staticText"/>
+					<box>					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+</box>
+					<textElement>
+						<font size="10"/>
+					</textElement>
+				<text><![CDATA[Product]]></text>
+				</staticText>
+				<textField isStretchWithOverflow="false" pattern="" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="149"
+						y="1"
+						width="373"
+						height="16"
+						forecolor="#000000"
+						key="textField"/>
+					<box>					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+</box>
+					<textElement>
+						<font size="10"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{product}]]></textFieldExpression>
+				</textField>
+			</band>
+			</groupHeader>
+			<groupFooter>
+			<band height="10"  isSplitAllowed="true" >
+			</band>
+			</groupFooter>
+		</group>
+		<background>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</background>
+		<title>
+			<band height="50"  isSplitAllowed="true" >
+				<staticText>
+					<reportElement
+						x="0"
+						y="5"
+						width="782"
+						height="40"
+						key="staticText"/>
+					<box>					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+</box>
+					<textElement textAlignment="Center">
+						<font size="30"/>
+					</textElement>
+				<text><![CDATA[Assets Register]]></text>
+				</staticText>
+				<line direction="TopDown">
+					<reportElement
+						x="0"
+						y="48"
+						width="781"
+						height="0"
+						forecolor="#000000"
+						backcolor="#FFFFFF"
+						key="line"/>
+					<graphicElement stretchType="NoStretch"/>
+				</line>
+				<line direction="TopDown">
+					<reportElement
+						x="0"
+						y="3"
+						width="781"
+						height="0"
+						forecolor="#000000"
+						backcolor="#FFFFFF"
+						key="line"/>
+					<graphicElement stretchType="NoStretch"/>
+				</line>
+			</band>
+		</title>
+		<pageHeader>
+			<band height="9"  isSplitAllowed="true" >
+			</band>
+		</pageHeader>
+		<columnHeader>
+			<band height="18"  isSplitAllowed="true" >
+				<staticText>
+					<reportElement
+						x="0"
+						y="0"
+						width="88"
+						height="18"
+						forecolor="#000000"
+						key="staticText-1"/>
+					<box leftPadding="1" rightPadding="1" topPadding="1" bottomPadding="1">					<pen lineWidth="0.25" lineStyle="Solid" lineColor="#0C0505"/>
+					<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#0C0505"/>
+					<leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#0C0505"/>
+					<bottomPen lineWidth="0.25" lineStyle="Solid" lineColor="#0C0505"/>
+					<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#0C0505"/>
+</box>
+					<textElement textAlignment="Center">
+						<font size="10"/>
+					</textElement>
+				<text><![CDATA[Document #]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="88"
+						y="0"
+						width="100"
+						height="18"
+						forecolor="#000000"
+						key="staticText-2"/>
+					<box leftPadding="1" rightPadding="1" topPadding="1" bottomPadding="1">					<pen lineWidth="0.25" lineStyle="Solid" lineColor="#0C0505"/>
+					<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#0C0505"/>
+					<leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#0C0505"/>
+					<bottomPen lineWidth="0.25" lineStyle="Solid" lineColor="#0C0505"/>
+					<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#0C0505"/>
+</box>
+					<textElement textAlignment="Center">
+						<font size="10"/>
+					</textElement>
+				<text><![CDATA[Value]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="188"
+						y="0"
+						width="100"
+						height="18"
+						forecolor="#000000"
+						key="staticText-3"/>
+					<box leftPadding="1" rightPadding="1" topPadding="1" bottomPadding="1">					<pen lineWidth="0.25" lineStyle="Solid" lineColor="#0C0505"/>
+					<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#0C0505"/>
+					<leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#0C0505"/>
+					<bottomPen lineWidth="0.25" lineStyle="Solid" lineColor="#0C0505"/>
+					<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#0C0505"/>
+</box>
+					<textElement textAlignment="Center">
+						<font size="10"/>
+					</textElement>
+				<text><![CDATA[Name]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="288"
+						y="0"
+						width="100"
+						height="18"
+						forecolor="#000000"
+						key="staticText-4"/>
+					<box leftPadding="1" rightPadding="1" topPadding="1" bottomPadding="1">					<pen lineWidth="0.25" lineStyle="Solid" lineColor="#0C0505"/>
+					<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#0C0505"/>
+					<leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#0C0505"/>
+					<bottomPen lineWidth="0.25" lineStyle="Solid" lineColor="#0C0505"/>
+					<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#0C0505"/>
+</box>
+					<textElement textAlignment="Center">
+						<font size="10"/>
+					</textElement>
+				<text><![CDATA[Cost]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="388"
+						y="0"
+						width="100"
+						height="18"
+						forecolor="#000000"
+						key="staticText-5"/>
+					<box leftPadding="1" rightPadding="1" topPadding="1" bottomPadding="1">					<pen lineWidth="0.25" lineStyle="Solid" lineColor="#0C0505"/>
+					<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#0C0505"/>
+					<leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#0C0505"/>
+					<bottomPen lineWidth="0.25" lineStyle="Solid" lineColor="#0C0505"/>
+					<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#0C0505"/>
+</box>
+					<textElement textAlignment="Center">
+						<font size="10"/>
+					</textElement>
+				<text><![CDATA[Status]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="488"
+						y="0"
+						width="100"
+						height="18"
+						forecolor="#000000"
+						key="staticText-6"/>
+					<box leftPadding="1" rightPadding="1" topPadding="1" bottomPadding="1">					<pen lineWidth="0.25" lineStyle="Solid" lineColor="#0C0505"/>
+					<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#0C0505"/>
+					<leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#0C0505"/>
+					<bottomPen lineWidth="0.25" lineStyle="Solid" lineColor="#0C0505"/>
+					<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#0C0505"/>
+</box>
+					<textElement textAlignment="Center">
+						<font size="10"/>
+					</textElement>
+				<text><![CDATA[Date of Purchase]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="588"
+						y="0"
+						width="100"
+						height="18"
+						forecolor="#000000"
+						key="staticText-7"/>
+					<box leftPadding="1" rightPadding="1" topPadding="1" bottomPadding="1">					<pen lineWidth="0.25" lineStyle="Solid" lineColor="#0C0505"/>
+					<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#0C0505"/>
+					<leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#0C0505"/>
+					<bottomPen lineWidth="0.25" lineStyle="Solid" lineColor="#0C0505"/>
+					<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#0C0505"/>
+</box>
+					<textElement textAlignment="Center">
+						<font size="10"/>
+					</textElement>
+				<text><![CDATA[Value Amount]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="688"
+						y="0"
+						width="41"
+						height="18"
+						forecolor="#000000"
+						key="staticText-8"/>
+					<box leftPadding="1" rightPadding="1" topPadding="1" bottomPadding="1">					<pen lineWidth="0.25" lineStyle="Solid" lineColor="#0C0505"/>
+					<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#0C0505"/>
+					<leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#0C0505"/>
+					<bottomPen lineWidth="0.25" lineStyle="Solid" lineColor="#0C0505"/>
+					<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#0C0505"/>
+</box>
+					<textElement textAlignment="Center">
+						<font size="10"/>
+					</textElement>
+				<text><![CDATA[Start]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="729"
+						y="0"
+						width="53"
+						height="18"
+						forecolor="#000000"
+						key="staticText-9"/>
+					<box leftPadding="1" rightPadding="1" topPadding="1" bottomPadding="1">					<pen lineWidth="0.25" lineStyle="Solid" lineColor="#0C0505"/>
+					<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#0C0505"/>
+					<leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#0C0505"/>
+					<bottomPen lineWidth="0.25" lineStyle="Solid" lineColor="#0C0505"/>
+					<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#0C0505"/>
+</box>
+					<textElement textAlignment="Center">
+						<font size="10"/>
+					</textElement>
+				<text><![CDATA[End]]></text>
+				</staticText>
+			</band>
+		</columnHeader>
+		<detail>
+			<band height="17"  isSplitAllowed="true" >
+				<line direction="TopDown">
+					<reportElement
+						x="0"
+						y="16"
+						width="782"
+						height="0"
+						forecolor="#808080"
+						backcolor="#FFFFFF"
+						key="line"/>
+					<graphicElement stretchType="NoStretch"/>
+				</line>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="88"
+						y="-3"
+						width="100"
+						height="18"
+						key="textField"/>
+					<box leftPadding="1" rightPadding="1" topPadding="1" bottomPadding="1">					<pen lineWidth="0.5" lineStyle="Solid" lineColor="#090404"/>
+					<topPen lineWidth="0.5" lineStyle="Solid" lineColor="#090404"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid" lineColor="#090404"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid" lineColor="#090404"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid" lineColor="#090404"/>
+</box>
+					<textElement>
+						<font size="10"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{value}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="188"
+						y="-3"
+						width="100"
+						height="18"
+						key="textField"/>
+					<box leftPadding="1" rightPadding="1" topPadding="1" bottomPadding="1">					<pen lineWidth="0.5" lineStyle="Solid" lineColor="#090404"/>
+					<topPen lineWidth="0.5" lineStyle="Solid" lineColor="#090404"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid" lineColor="#090404"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid" lineColor="#090404"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid" lineColor="#090404"/>
+</box>
+					<textElement>
+						<font size="10"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{name}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="0"
+						y="-3"
+						width="88"
+						height="18"
+						key="textField"/>
+					<box leftPadding="1" rightPadding="1" topPadding="1" bottomPadding="1">					<pen lineWidth="0.5" lineStyle="Solid" lineColor="#090404"/>
+					<topPen lineWidth="0.5" lineStyle="Solid" lineColor="#090404"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid" lineColor="#090404"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid" lineColor="#090404"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid" lineColor="#090404"/>
+</box>
+					<textElement>
+						<font size="10"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{documentno}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="##0.00" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="288"
+						y="-3"
+						width="100"
+						height="18"
+						key="textField"/>
+					<box leftPadding="1" rightPadding="1" topPadding="1" bottomPadding="1">					<pen lineWidth="0.5" lineStyle="Solid" lineColor="#090404"/>
+					<topPen lineWidth="0.5" lineStyle="Solid" lineColor="#090404"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid" lineColor="#090404"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid" lineColor="#090404"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid" lineColor="#090404"/>
+</box>
+					<textElement textAlignment="Right">
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.math.BigDecimal"><![CDATA[]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="388"
+						y="-3"
+						width="100"
+						height="18"
+						key="textField"/>
+					<box leftPadding="1" rightPadding="1" topPadding="1" bottomPadding="1">					<pen lineWidth="0.5" lineStyle="Solid" lineColor="#090404"/>
+					<topPen lineWidth="0.5" lineStyle="Solid" lineColor="#090404"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid" lineColor="#090404"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid" lineColor="#090404"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid" lineColor="#090404"/>
+</box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="488"
+						y="-3"
+						width="100"
+						height="18"
+						key="textField"/>
+					<box leftPadding="1" rightPadding="1" topPadding="1" bottomPadding="1">					<pen lineWidth="0.5" lineStyle="Solid" lineColor="#090404"/>
+					<topPen lineWidth="0.5" lineStyle="Solid" lineColor="#090404"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid" lineColor="#090404"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid" lineColor="#090404"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid" lineColor="#090404"/>
+</box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.sql.Timestamp"><![CDATA[$F{datepurchased}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="##0.00" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="588"
+						y="-3"
+						width="100"
+						height="18"
+						key="textField"/>
+					<box leftPadding="1" rightPadding="1" topPadding="1" bottomPadding="1">					<pen lineWidth="0.5" lineStyle="Solid" lineColor="#090404"/>
+					<topPen lineWidth="0.5" lineStyle="Solid" lineColor="#090404"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid" lineColor="#090404"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid" lineColor="#090404"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid" lineColor="#090404"/>
+</box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.math.BigDecimal"><![CDATA[$F{assetvalueamt}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="688"
+						y="-3"
+						width="41"
+						height="18"
+						key="textField"/>
+					<box leftPadding="1" rightPadding="1" topPadding="1" bottomPadding="1">					<pen lineWidth="0.5" lineStyle="Solid" lineColor="#090404"/>
+					<topPen lineWidth="0.5" lineStyle="Solid" lineColor="#090404"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid" lineColor="#090404"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid" lineColor="#090404"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid" lineColor="#090404"/>
+</box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.sql.Timestamp"><![CDATA[$F{amortizationstartdate}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="729"
+						y="-3"
+						width="53"
+						height="18"
+						key="textField"/>
+					<box leftPadding="1" rightPadding="1" topPadding="1" bottomPadding="1">					<pen lineWidth="0.5" lineStyle="Solid" lineColor="#090404"/>
+					<topPen lineWidth="0.5" lineStyle="Solid" lineColor="#090404"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid" lineColor="#090404"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid" lineColor="#090404"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid" lineColor="#090404"/>
+</box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.sql.Timestamp"><![CDATA[$F{amortizationenddate}]]></textFieldExpression>
+				</textField>
+			</band>
+		</detail>
+		<columnFooter>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</columnFooter>
+		<pageFooter>
+			<band height="27"  isSplitAllowed="true" >
+				<textField isStretchWithOverflow="false" pattern="" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="573"
+						y="4"
+						width="170"
+						height="19"
+						forecolor="#000000"
+						key="textField"/>
+					<box>					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+</box>
+					<textElement textAlignment="Right">
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA["Page " + $V{PAGE_NUMBER} + " of "]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="" isBlankWhenNull="false" evaluationTime="Report" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						mode="Transparent"
+						x="746"
+						y="4"
+						width="36"
+						height="19"
+						forecolor="#000000"
+						backcolor="#FFFFFF"
+						key="textField"/>
+					<box>					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+</box>
+					<textElement>
+						<font size="10" isBold="false" isItalic="false" isUnderline="false" isPdfEmbedded ="false" isStrikeThrough="false" />
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA["" + $V{PAGE_NUMBER}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="1"
+						y="6"
+						width="209"
+						height="19"
+						forecolor="#000000"
+						key="textField"/>
+					<box>					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+</box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.util.Date"><![CDATA[new Date()]]></textFieldExpression>
+				</textField>
+			</band>
+		</pageFooter>
+		<summary>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</summary>
+</jasperReport>

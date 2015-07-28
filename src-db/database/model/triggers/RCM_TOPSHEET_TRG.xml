@@ -1,0 +1,120 @@
+<?xml version="1.0"?>
+  <database name="TRIGGER RCM_TOPSHEET_TRG">
+    <trigger name="RCM_TOPSHEET_TRG" table="C_ORDER" fires="after" insert="true" update="true" delete="true" foreach="row">
+      <body><![CDATA[
+
+    /*************************************************************************
+    * The contents of this file are subject to the Openbravo  Public  License
+    * Version  1.1  (the  "License"),  being   the  Mozilla   Public  License
+    * Version 1.1  with a permitted attribution clause; you may not  use this
+    * file except in compliance with the License. You  may  obtain  a copy of
+    * the License at http://www.openbravo.com/legal/license.html
+    * Software distributed under the License  is  distributed  on  an "AS IS"
+    * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied. See the
+    * License for the specific  language  governing  rights  and  limitations
+    * under the License.
+    * The Original Code is Openbravo ERP.
+    * The Initial Developer of the Original Code is Openbravo SLU
+    * All portions are Copyright (C) 2001-2013 Openbravo SLU
+    * All Rights Reserved.
+    * Contributor(s): Mohammad Abu Naser, Tasawr Interective.
+    ************************************************************************/ 
+  v_abstractsheet_ID VARCHAR2(32);
+  v_count NUMBER:=0;
+  v_count1 NUMBER:=0;
+  v_count9 NUMBER:=0;
+  CUR_PARAMETER_TOPSHEET RECORD;
+  v_rowcount NUMBER;
+ v_duration character varying(32);
+   
+BEGIN
+
+  IF AD_isTriggerEnabled()='N' THEN RETURN;
+  END IF;
+
+  IF (INSERTING ) THEN
+
+     SELECT count(*)
+     INTO v_count
+     FROM c_order
+     WHERE c_order_id=:NEW.c_order_id;
+     
+    -- IF coalesce(v_count,0)=1 THEN
+
+  --   select count(*) into v_count9 from thr_empl_equip where thr_empl_info_id = new.thr_empl_info_id;
+
+     if v_count>0 then
+     IF :NEW.em_rcm_topsheet='Y' THEN
+	FOR CUR_PARAMETER_TOPSHEET IN (
+		select ol.em_rcm_boqtype,sum(ol.linenetamt) as lineamount from c_order o ,c_orderline ol ,c_doctype c
+		where o.c_order_id=ol.c_order_id
+		and o.c_doctypetarget_id=c.c_doctype_id
+		and o.ad_client_id='F566B653BBFF417AB00F88941061033E'
+		and o.documentno='1000000'
+		and o.IsSOTrx='Y'
+		and c.docsubtypeso='OB'
+		group by ol.em_rcm_boqtype
+		)
+		LOOP
+
+		--select * from temp
+			v_abstractsheet_ID:=get_uuid();
+
+			INSERT INTO rcm_abstractsheet
+			(
+			  rcm_abstractsheet_id ,ad_client_id , ad_org_id ,isactive , created ,
+			  createdby , updated , updatedby ,
+			  c_bpartner_id ,documentno ,topsheetversion ,
+			  boqtype , pwdamount ,estimated_cost,direct_cost ,indirect_cost , quoted_amount,
+			  description
+			)
+			VALUES 
+			(
+			   v_abstractsheet_ID,:new.ad_org_id,:new.ad_client_ID,'Y',now(),
+			   :new.CreatedBy,now(),:new.createdBy,
+			   :NEW.c_bpartner_id,:NEW.documentno,:NEW.topsheetversion,
+			   CUR_PARAMETER_TOPSHEET.em_rcm_boqtype,0,0,CUR_PARAMETER_TOPSHEET.lineamount,0,0,null
+			);
+	
+	END LOOP;
+	/*else
+			v_endofserviceline_ID:=get_uuid();
+			INSERT INTO thr_empl_endofserviceline
+			(
+			  thr_empl_endofserviceline_id ,ad_org_id ,ad_client_id ,isactive ,created ,
+			  createdby , updated ,updatedby ,
+			  thr_empl_endofservice_id ,thr_empl_info_id
+			)
+			VALUES 
+			(
+			   v_endofserviceline_ID,:new.ad_org_id,:new.ad_client_ID,'Y',now(),
+			   :new.CreatedBy,now(),:new.createdBy,
+			   :NEW.thr_empl_endofservice_id,:new.thr_empl_info_id
+			);
+
+delete from thr_empl_endofserviceline where thr_empl_endofserviceline_ID =v_endofserviceline_ID;
+end if;
+		
+	Select age(date_of_leaving, date_of_joining) INTO v_duration  FROM thr_empl_endofservice 
+	where thr_empl_endofservice_id=:new.thr_empl_endofservice_id;
+
+	update  thr_empl_endofservice set duration = v_duration where 
+	thr_empl_endofservice_id=:new.thr_empl_endofservice_id;
+	
+		IF(:new.isresign='Y' and :new.approved='Y' and :new.status='HRMA')THEN
+			Update thr_empl_info set isactive ='N',status ='Resigned' where thr_empl_info_id = :new.thr_empl_info_id;
+			Update thr_empl_salary set isactive ='N' where thr_empl_info_id = :new.thr_empl_info_id;
+		ELSif(:new.isresign='N' and :new.approved='Y' and :new.status='HRMA')THEN
+		Update thr_empl_info set isactive ='N',status ='Terminated' where thr_empl_info_id = :new.thr_empl_info_id;
+		Update thr_empl_salary set isactive ='N' where thr_empl_info_id = :new.thr_empl_info_id;
+		--END IF;*/
+		--END IF;
+	End if;
+	END IF;
+   
+END IF;
+ 	
+END RCM_TOPSHEET_TRG
+]]></body>
+    </trigger>
+  </database>

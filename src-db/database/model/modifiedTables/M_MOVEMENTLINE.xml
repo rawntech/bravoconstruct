@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+  <database name="MODIFIED TABLE M_MOVEMENTLINE">
+    <table name="M_MOVEMENTLINE" primaryKey="M_MOVEMENTLINE_KEY">
+      <column name="EM_RCM_M_INOUTLINE" primaryKey="false" required="false" type="VARCHAR" size="32" autoIncrement="false">
+        <default/>
+        <onCreateDefault/>
+      </column>
+      <foreign-key foreignTable="M_INOUT" name="EM_RCM_M_MOVEMENT_INOUT">
+        <reference local="EM_RCM_M_INOUTLINE" foreign="M_INOUT_ID"/>
+      </foreign-key>
+    </table>
+  </database>

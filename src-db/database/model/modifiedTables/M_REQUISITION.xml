@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+  <database name="MODIFIED TABLE M_REQUISITION">
+    <table name="M_REQUISITION" primaryKey="M_REQUISITION_KEY">
+      <column name="EM_RCM_C_PROJECT" primaryKey="false" required="false" type="VARCHAR" size="32" autoIncrement="false">
+        <default/>
+        <onCreateDefault/>
+      </column>
+      <column name="EM_RCM_FIN_PAYMENT_METHOD" primaryKey="false" required="false" type="VARCHAR" size="32" autoIncrement="false">
+        <default/>
+        <onCreateDefault/>
+      </column>
+      <column name="EM_RCM_PAYMENT_DETAILS" primaryKey="false" required="false" type="VARCHAR" size="60" autoIncrement="false">
+        <default/>
+        <onCreateDefault/>
+      </column>
+      <column name="EM_RCM_CARRYING_DLS" primaryKey="false" required="false" type="VARCHAR" size="60" autoIncrement="false">
+        <default/>
+        <onCreateDefault/>
+      </column>
+      <column name="EM_RCM_IS_APPROVED" primaryKey="false" required="false" type="CHAR" size="1" autoIncrement="false">
+        <default/>
+        <onCreateDefault/>
+      </column>
+      <foreign-key foreignTable="FIN_PAYMENTMETHOD" name="EM_RCM_M_REQUISITION_METHOD">
+        <reference local="EM_RCM_FIN_PAYMENT_METHOD" foreign="FIN_PAYMENTMETHOD_ID"/>
+      </foreign-key>
+      <foreign-key foreignTable="C_PROJECT" name="EM_RCM_M_REQUISITION_PROJ">
+        <reference local="EM_RCM_C_PROJECT" foreign="C_PROJECT_ID"/>
+      </foreign-key>
+    </table>
+  </database>

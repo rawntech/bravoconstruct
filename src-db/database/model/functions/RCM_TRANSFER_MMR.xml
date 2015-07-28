@@ -1,0 +1,78 @@
+<?xml version="1.0"?>
+  <database name="FUNCTION RCM_TRANSFER_MMR">
+    <function name="RCM_TRANSFER_MMR" type="NUMERIC">
+      <parameter name="p_from_date" type="TIMESTAMP" mode="in">
+        <default/>
+      </parameter>
+      <parameter name="p_to_date" type="TIMESTAMP" mode="in">
+        <default/>
+      </parameter>
+      <parameter name="p_product_id" type="VARCHAR" mode="in">
+        <default/>
+      </parameter>
+      <parameter name="p_locator_id" type="VARCHAR" mode="in">
+        <default/>
+      </parameter>
+      <body><![CDATA[/*************************************************************************
+* The contents of this file are subject to the Openbravo  Public  Licenseer
+* Version  1.1  (the  "License"),  being   the  Mozilla   Public  License
+* Version 1.1  with a permitted attribution clause; you may not  use this
+* file except in compliance with the License. You  may  obtain  a copy of
+* the License at http://www.openbravo.com/legal/license.html
+* Software distributed under the License  is  distributed  on  an "AS IS"
+* basis, WITHOUT WARRANTY OF ANY KIND, either express or implied. See the
+* License for the specific  language  governing  rights  and  limitations
+* under the License.
+* The Original Code is Openbravo ERP.
+* The Initial Developer of the Original Code is Openbravo SLU
+* All portions are Copyright (C) 2009-2012 Openbravo SLU
+* All Rights Reserved.
+* Contributor(s):  ______________________________________.
+************************************************************************/
+  -- Logistice
+  vv_movementqty NUMBER:=0;
+v_product VARCHAR2(32);
+
+   
+BEGIN
+
+--cash
+
+SELECT 
+ABS(SUM(MOVEMENTQTY)) AS movementqty INTO vv_movementqty
+      FROM M_PRODUCT left join M_PRODUCT_CATEGORY on M_PRODUCT.M_PRODUCT_CATEGORY_ID  = M_PRODUCT_CATEGORY.M_PRODUCT_CATEGORY_ID,
+           M_PRODUCT_UOM right join M_TRANSACTION on M_TRANSACTION.M_PRODUCT_UOM_ID = M_PRODUCT_UOM.M_PRODUCT_UOM_ID
+                         left join C_UOM C2 on M_PRODUCT_UOM.C_UOM_ID = C2.C_UOM_ID,
+        M_LOCATOR, C_UOM C1, M_ATTRIBUTESETINSTANCE
+      WHERE M_TRANSACTION.M_PRODUCT_ID = M_PRODUCT.M_PRODUCT_ID
+      AND M_TRANSACTION.M_ATTRIBUTESETINSTANCE_ID = M_ATTRIBUTESETINSTANCE.M_ATTRIBUTESETINSTANCE_ID
+      AND M_TRANSACTION.M_LOCATOR_ID = M_LOCATOR.M_LOCATOR_ID 
+      AND M_TRANSACTION.C_UOM_ID = C1.C_UOM_ID
+      and M_TRANSACTION.ad_client_id='F566B653BBFF417AB00F88941061033E'
+      and M_TRANSACTION.M_LOCATOR_ID =p_locator_id
+      and M_TRANSACTION.MOVEMENTDATE >= p_from_date
+      and M_TRANSACTION.MOVEMENTDATE <= p_TO_DATE
+      and M_PRODUCT.M_PRODUCT_ID=p_product_id
+      and M_TRANSACTION.MOVEMENTTYPE='M-'
+      AND 1=1
+      GROUP BY M_PRODUCT_CATEGORY.NAME,M_PRODUCT.UPC,M_PRODUCT.VALUE, 
+      M_PRODUCT.NAME, M_ATTRIBUTESETINSTANCE.M_ATTRIBUTESETINSTANCE_ID, 
+      M_ATTRIBUTESETINSTANCE.DESCRIPTION, M_LOCATOR.M_LOCATOR_ID, M_LOCATOR.X,
+      M_LOCATOR.Y, M_LOCATOR.Z, C1.NAME, M_PRODUCT.WEIGHT, C1.C_UOM_ID, 
+      M_TRANSACTION.M_PRODUCT_UOM_ID, C2.NAME, M_LOCATOR.M_WAREHOUSE_ID,
+      m_product.m_product_id
+      HAVING SUM(MOVEMENTQTY) <=0
+      ORDER BY  M_PRODUCT_CATEGORY.NAME,M_PRODUCT.UPC,M_PRODUCT.VALUE, M_PRODUCT.NAME, M_ATTRIBUTESETINSTANCE.DESCRIPTION,M_LOCATOR.X, M_LOCATOR.Y, M_LOCATOR.Z
+
+;
+
+/**/
+RETURN vv_movementqty;
+EXCEPTION
+WHEN OTHERS THEN
+  NULL;
+  --RETURN;
+END RCM_TRANSFER_MMR
+]]></body>
+    </function>
+  </database>
